@@ -25,36 +25,54 @@ namespace Sample{
 
         public void RegisterDevice(){
 
-            Console.WriteLine("Enter details of device to Register");
-            int slno=MyConsole.GetInt("Enter slno: ");
-            string make=MyConsole.GetString("Enter Make: ");
-            string model=MyConsole.GetString("Enter Model: ");
-            double price=MyConsole.GetDouble("Enter price: ");
-            Machine newmachine= new Machine{Slno=slno,Make=make,Model=model,price=price};
+            Machine newmachine=MachineUI.GetMachine();
             this._laptops.Add(newmachine);
-            Console.WriteLine("Added Succesfully \n");
 
         }
 
-        public void updateDeviceDetails(int slno,Machine mac){
+        public bool updateDeviceDetails(int slno,Machine mac){
 
             foreach(var item in _laptops){
                 if(item.Slno==slno){
                     item.Make=mac.Make;
                     item.Model=mac.Model;
                     item.price=mac.price;
-
-                    Console.WriteLine("Updated Succesfully \n");
-                    return;
+                    return true;
                 }
                 
             }
-             Console.WriteLine("Not Found. \n");
-
+             return false;
         }
 
         public List<Machine> GetAllRegisteredDevices(){
             return _laptops;
+        }
+    }
+
+    class MachineUI{
+
+        public static Machine GetMachine(){
+
+            Console.WriteLine("Enter details of device to Register");
+            int slno=MyConsole.GetInt("Enter slno: ");     
+            string make=MyConsole.GetString("Enter Make: ");
+            string model=MyConsole.GetString("Enter Model: ");
+            double price=MyConsole.GetDouble("Enter price: ");
+            Machine newmachine= new Machine{Slno=slno,Make=make,Model=model,price=price};
+
+            return newmachine;
+        }
+
+         public static Machine GetMachineUpdate(){
+
+            int slno=MyConsole.GetInt("Enter slno: "); 
+            Console.WriteLine("Enter details of device to Update");
+            string make=MyConsole.GetString("Enter Make: ");
+            string model=MyConsole.GetString("Enter Model: ");
+            double price=MyConsole.GetDouble("Enter price: ");
+            Machine newmachine= new Machine{Slno=slno,Make=make,Model=model,price=price};
+
+            return newmachine;
         }
     }
 
