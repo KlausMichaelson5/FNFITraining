@@ -12,20 +12,19 @@ namespace Sample{
         int input=0;
         do{
         Console.WriteLine("Select the function you want to perform.\n");
-        input=MyConsole.GetInt("1 for Registering Device.\n2 for update.\n3 for getting all  registered devices.\n4 for exit.\n");  
+        input=MyConsole.GetInt("Press 1 for Registering Device.\nPress 2 to Update Registered Device.\nPress 3 for Displaying all  Registered Devices.\nPress 4 for Exit.\n");  
         switch (input)
         {
             case 1:
                 md.RegisterDevice();
+                Console.WriteLine("Added Succesfully \n");
                 break;
             case 2:
-                   int slno= MyConsole.GetInt("Enter slno to update");
-                   string make=MyConsole.GetString("Enter new Make: ");
-                   string model=MyConsole.GetString("Enter new Model: ");
-                   double price=MyConsole.GetDouble("Enter new price: ");
-                   Machine newmachine= new Machine{Slno=slno,Make=make,Model=model,price=price};
-                    md.updateDeviceDetails(slno,newmachine);
-                    break;
+                  Machine newmachine=MachineUI.GetMachineUpdate();
+                  bool result=md.updateDeviceDetails(newmachine.Slno,newmachine);
+                  if(result){ Console.WriteLine("Updated Succesfully \n"); }
+                  else { Console.WriteLine("Machine Not Found. \n"); }
+                  break;
             case 3:
                 List<Machine> _laptops=md.GetAllRegisteredDevices();
                 Console.WriteLine();
