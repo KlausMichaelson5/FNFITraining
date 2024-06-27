@@ -40,9 +40,23 @@ class Ex07_FinancialCalc{
 
    }
 
+    private static EmiType GetEmiType(string message){
+    Console.WriteLine(message);
+
+    var emiTypes=Enum.GetValues((typeof(EmiType)));
+    foreach(var emiType in emiTypes){
+        Console.WriteLine(emiType);
+    }
+
+    Console.WriteLine();
+
+    EmiType emi=(EmiType)Enum.Parse(typeof(EmiType),Console.ReadLine(),true);
+    return emi;
+    }
+
     static void EmiCalcultor(){
 
-        EmiType emi=(EmiType)MyConsole.GetEmiType("Please select the type of Emi:");
+        EmiType emi=(EmiType)GetEmiType("Please select the type of Emi:");
         double principal=MyConsole.GetDouble("Enter the Principal amount:");
         double roi=MyConsole.GetDouble("Enter the Rate of Interest:");
         int term=MyConsole.GetInt("Enter the term duration:Min: "+(int)emi);
